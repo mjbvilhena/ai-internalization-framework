@@ -8,6 +8,6 @@ description: >-
 
 # Internalization Skill
 
-When the user asks to "internalize" a project, directory, file, or concept, apply the following protocol.
+When the user asks to "internalize" a project, directory, file, or concept, first determine if they want a broad overview (Standard Protocol) or a deep, line-by-line review of a single file without skipping text (Single-File Deep Review Protocol). If unspecified, ask which mode they prefer.
 
 <include src="../core/internalize_prompt.md" />
