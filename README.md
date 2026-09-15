@@ -25,11 +25,15 @@ Installs a global skill to your Antigravity profile.
 **Usage:** Ask agy to "internalize this project".
 
 ### Cursor
-Installs a `.cursorrules` file into the target directory.
+Installs a `.cursor/commands/internalize.md` custom slash command globally (or to a target directory).
 ```bash
+# Install globally for all Cursor projects (default)
+./cursor/install_cursor.sh
+
+# Or install to a specific workspace only
 ./cursor/install_cursor.sh [target_directory]
 ```
-**Usage:** Open the project in Cursor and type `@internalize` in the chat.
+**Usage:** Open the project in Cursor and type `/internalize` in the Agent Chat.
 
 ### GitHub Copilot (GHCP)
 Installs `.github/copilot-instructions.md` into the target directory.
