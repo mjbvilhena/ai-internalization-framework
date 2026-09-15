@@ -1,17 +1,32 @@
 #!/bin/bash
 set -e
 
-TARGET_DIR="${1:-$(pwd)}"
-CURSOR_FILE="$TARGET_DIR/.cursorrules"
-
-echo "Installing Cursor Internalization Rule to $CURSOR_FILE..."
-
-if [ -f "$CURSOR_FILE" ]; then
-    echo "" >> "$CURSOR_FILE"
-    echo "---" >> "$CURSOR_FILE"
+if [[ -z "$1" ]] || [[ "$1" == "--global" ]]; then
+    CURSOR_COMMANDS_DIR="$HOME/.cursor/commands"
+    echo "Installing globally for Cursor..."
+else
+    TARGET_DIR="$1"
+    CURSOR_COMMANDS_DIR="$TARGET_DIR/.cursor/commands"
+    echo "Installing workspace-specifically to $TARGET_DIR..."
 fi
 
-cat "$(dirname "$0")/.cursorrules-template" >> "$CURSOR_FILE"
+COMMAND_FILE="$CURSOR_COMMANDS_DIR/internalize.md"
 
-echo "✅ Successfully installed. You can now use @internalize in Cursor in this workspace."
-echo "Note: To install globally, you must manually paste the contents of .cursorrules-template into Cursor's Global Settings UI."
+echo "Installing Cursor Internalization Command to $COMMAND_FILE..."
+mkdir -p "$CURSOR_COMMANDS_DIR"
+
+# Generate the frontmatter
+cat << 'FRONTMATTER' > "$COMMAND_FILE"
+---
+description: Run the internalization protocol to understand and map the project
+globs: *
+name: internalize
+---
+
+FRONTMATTER
+
+# Append the core prompt
+cat "$(dirname "$0")/../core/internalize_prompt.md" >> "$COMMAND_FILE"
+
+echo "✅ Successfully installed."
+echo "You can now use /internalize in the Cursor Agent Chat."
