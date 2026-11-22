@@ -43,8 +43,12 @@ Installs `.github/copilot-instructions.md` into the target directory.
 **Usage:** Open the project in VS Code with GHCP and ask it to "internalize the project".
 
 ### Claude Code
-Installs a global `cl-internalize` wrapper script to `~/.local/bin`.
+Installs an `internalize` skill globally to `~/.claude/skills/` (or to a target project's `.claude/skills/`).
 ```bash
+# Install globally for all projects (default)
 ./claude-code/install_claude.sh
+
+# Or install to a specific project only
+./claude-code/install_claude.sh [target_directory]
 ```
-**Usage:** Run `cl-internalize` in your terminal within any project directory.
+**Usage:** Start Claude Code in the project and type `/internalize`, or ask it to "internalize this project".
